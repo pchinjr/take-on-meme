@@ -33,7 +33,6 @@ export class CommentAPI {
       id: crypto.randomUUID(), // Ensure each new comment gets a unique ID
       name: name,
       comment: comment,
-      createdAt: new Date(), // Use the current date and time
     };
     this.comments.push(newComment); // Add to the array
   }
