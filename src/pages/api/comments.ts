@@ -14,7 +14,6 @@ export async function POST({ request }: APIContext) {
   const name = formData.get("name")?.toString() ?? "";
   const comment = formData.get("comment")?.toString() ?? "";
   await commentAPI.addComment(name, comment);
-  console.log(request.headers.get("HX-Request"));
   const newCommentHtml = `<li style="padding: 1rem; border: 1px solid #ccc; margin-top: 1rem"> ${name}: ${comment}</li>`;
   return new Response(newCommentHtml, {
     status: 200,
