@@ -4,7 +4,6 @@ const commentAPI = new CommentAPI();
 
 export async function GET() {
   const comments = await commentAPI.fetchComments();
-  console.log(comments);
   return new Response(JSON.stringify(comments), {
     headers: { "Content-Type": "application/json" },
   });
