@@ -1,0 +1,49 @@
+<div class="song-search">
+<input class="form-control" type="search" 
+       name="search" placeholder="Search for songs..." 
+       hx-post="/api/searchSongs" 
+       hx-trigger="input changed delay:500ms, search" 
+       hx-target="#search-results">
+<table class="table">
+<thead>
+<tr>
+  <th>Title</th>
+  <th>Writers</th>
+  <th>Length</th>
+</tr>
+</thead>
+<tbody id="search-results">
+</tbody>
+</table>
+</div>
+
+<style>
+    .song-search {
+        margin: 20px;
+    }
+    #search-results {
+        min-height: 100px;
+    }
+    .table {
+        width: 100%; /* Full-width */
+        border-collapse: collapse; /* Collapse borders */
+        margin-top: 20px; /* Add some margin at the top */
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        background-color: #fff; /* White background for the table */
+        color: #333; /* Dark grey text */
+        table-layout: fixed;
+    }
+    .table th, .table td {
+        text-align: left; /* Align text to the left */
+        padding: 12px 15px; /* Padding for cells */
+        border-bottom: 1px solid #ddd; /* Light grey border for separation */
+    }
+    .table th {
+        background-color: #f4f4f4; /* Light grey background for headers */
+        color: #333; /* Dark grey text for headers */
+        font-weight: bold; /* Make header text bold */
+    }
+    .table thead tr {
+        border-bottom: 2px solid #ccc; /* Darker bottom border for the header row */
+    }
+</style>

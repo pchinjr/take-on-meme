@@ -1,0 +1,39 @@
+---
+import { CommentAPI } from '../data/comment_api';
+const commentAPI = new CommentAPI();
+const comments = await commentAPI.fetchComments();
+---
+
+<div x-data="{ comments: [], comment: '', name: ''}" class="news-form">
+    <form hx-post="/api/comments/" hx-target="#comments-list" hx-swap="beforeend">
+        <input type="text" x-model="name" name="name" placeholder="Your Name">
+        <textarea x-model="comment" name="comment" placeholder="Your Comment"></textarea>
+        <button type="submit">Post Comment</button>
+    </form>
+    <ul id="comments-list">
+        {comments.map((comment) => (
+            <li>{comment.name}: {comment.comment}</li>
+        ))}
+    </ul>    
+</div>
+
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    li {
+        padding: 1rem;
+        border: 1px solid #ccc;
+        margin-top: 1rem;
+    }
+    #comments-list {
+        margin-top: 2rem;
+    }
+</style>
