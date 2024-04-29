@@ -1,5 +1,4 @@
 export function searchSongs(query: string) {
-  // Simulate a database of items
   const songs = [
     {
       title: "Take On Me",
