@@ -1,3 +1,4 @@
+// comment_api.ts
 type Comment = {
   id: string;
   name: string;
@@ -5,21 +6,34 @@ type Comment = {
 };
 
 export class CommentAPI {
-  private commentsFilePath = "/workspaces/take-on-meme/src/data/comments.json";
+  private comments: Comment[] = [
+    {
+      id: "1",
+      name: "Maggie",
+      comment: "Such a great song!",
+    },
+    {
+      id: "2",
+      name: "Jonas",
+      comment: "I've always loved this track.",
+    },
+    {
+      id: "3",
+      name: "Claire",
+      comment: "This brings back memories.",
+    },
+  ];
 
   async fetchComments(): Promise<Comment[]> {
-    const commentsData = await Deno.readTextFile(this.commentsFilePath);
-    return JSON.parse(commentsData);
+    return this.comments; // Return the hardcoded data
   }
 
   async addComment(name: string, comment: string): Promise<void> {
-    const comments = await this.fetchComments();
     const newComment: Comment = {
-      id: crypto.randomUUID(),
+      id: crypto.randomUUID(), 
       name: name,
       comment: comment,
     };
-    comments.push(newComment);
-    await Deno.writeTextFile(this.commentsFilePath, JSON.stringify(comments));
+    this.comments.push(newComment); 
   }
 }
