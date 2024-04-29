@@ -1,22 +1,14 @@
-// comment_api.ts
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
 type Comment = {
   id: string;
   name: string;
   comment: string;
 };
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 export class CommentAPI {
-  private commentsFilePath = path.resolve(__dirname, "comments.json");
+  private commentsFilePath = "/workspaces/take-on-meme/src/data/comments.json";
 
-  fetchComments(): Promise<Comment[]> {
-    const commentsData = fs.readFileSync(this.commentsFilePath, "utf-8");
+  async fetchComments(): Promise<Comment[]> {
+    const commentsData = await Deno.readTextFile(this.commentsFilePath);
     return JSON.parse(commentsData);
   }
 
@@ -28,6 +20,6 @@ export class CommentAPI {
       comment: comment,
     };
     comments.push(newComment);
-    fs.writeFileSync(this.commentsFilePath, JSON.stringify(comments));
+    await Deno.writeTextFile(this.commentsFilePath, JSON.stringify(comments));
   }
 }
